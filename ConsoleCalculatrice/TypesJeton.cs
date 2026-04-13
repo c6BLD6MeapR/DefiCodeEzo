@@ -1,9 +1,7 @@
-﻿
-
-namespace ConsoleCalculatrice
+﻿namespace ConsoleCalculatrice
 {
     public enum TypesJeton
     {
-        Nombre, Plus, Fin
+        Nombre, Plus, Moins, Fin
     }
 }
