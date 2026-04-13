@@ -33,6 +33,8 @@ namespace ConsoleCalculatrice
                     }
                 }
             }
+
+            yield return new Jeton(TypesJeton.Fin, string.Empty);
         }
     }
 }
