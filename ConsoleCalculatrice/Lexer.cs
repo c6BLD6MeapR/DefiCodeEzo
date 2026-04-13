@@ -8,7 +8,7 @@ namespace ConsoleCalculatrice
         private const string SEPARATEUR = "|";
 
         private List<(TypesJeton TypeJeton, string Pattern)> _regles = new();
-        private Regex _regex;
+        private Regex? _regex;
 
         public void AjouterRegle(TypesJeton typeJeton, string pattern)
         {
@@ -20,6 +20,8 @@ namespace ConsoleCalculatrice
 
         public IEnumerable<Jeton> Extraire(string equation)
         {
+            if (_regex == null) { yield break; }
+
             foreach (Match match in _regex.Matches(equation))
             {
                 foreach ((TypesJeton TypeJeton, string Pattern) regle in _regles)
