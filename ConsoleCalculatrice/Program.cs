@@ -1,6 +1,7 @@
 ﻿using ConsoleCalculatrice;
 using ConsoleCalculatrice.Analyseurs;
 using ConsoleCalculatrice.Composite;
+using System.Globalization;
 
 Lexer lexer = new Lexer();
 
@@ -20,7 +21,14 @@ string equation = "-2 * -3";
 IEnumerable<Jeton> jetons = lexer.Extraire(equation);
 AnalyseurExpression analyseur = new AnalyseurExpression(jetons);
 
-analyseur.Enregistrer(TypesJeton.Nombre, new AnalyseurNombre());
+Func<string, double> modeleNombre = (s) =>
+{
+    if(double.TryParse(s, CultureInfo.InvariantCulture, out double d)) { return d; }
+
+    throw new FormatException($"La valeur du jeton {s} n'est pas un nombre valide.");
+};
+
+analyseur.Enregistrer(TypesJeton.Nombre, new AnalyseurNombre(modeleNombre));
 
 Dictionary<TypesJeton, Func<double, double>> modelesUnaire = new()
 {
