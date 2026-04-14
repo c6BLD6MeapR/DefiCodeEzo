@@ -2,6 +2,6 @@
 {
     public enum TypesJeton
     {
-        Nombre, Plus, Moins, Fin
+        Nombre, Plus, Moins, Multiplication, Division, Fin
     }
 }
